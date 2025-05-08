@@ -11,4 +11,20 @@ router.get('/list', (_, res) => {
     }
 });
 
+router.get('/:username', (req, res) => {
+    const { username } = req.params;
+
+    try {
+        const user = db.prepare('SELECT * FROM users WHERE username = ?').get(username);
+
+        if (!user) {
+            return res.status(404).send('Usuário não encontrado');
+        }
+
+        res.status(200).json(user);
+    } catch (e) {
+        res.status(500).send('Erro ao buscar usuário');
+    }
+});
+
 module.exports = router;
