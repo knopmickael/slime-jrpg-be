@@ -1,22 +1,19 @@
 const express = require('express');
-const db = require('./integrations/sqlite-conn');
-const app = express();
-const port = 3000;
+const db = require('../integrations/sqlite-conn');
+const router = express.Router();
 
-app.use(express.json());
-
-app.post('/api/register', (req, res) => {
-    const { username, password } = req.body;
+router.post('/register', (req, res) => {
+    const { usermail, username, password } = req.body;
     try {
-        db.prepare('INSERT INTO users (username, password, unlocked_slimes) VALUES (?, ?, ?)')
-          .run(username, password, '[]');
+        db.prepare('INSERT INTO users (usermail, username, password) VALUES (?, ?, ?)')
+          .run(usermail, username, password);
         res.status(201).send('Usuário registrado com sucesso');
     } catch (e) {
         res.status(400).send('Erro ao registrar usuário');
     }
 });
 
-app.post('/api/login', (req, res) => {
+router.post('/login', (req, res) => {
     const { username, password } = req.body;
     const user = db.prepare('SELECT * FROM users WHERE username = ? AND password = ?')
                   .get(username, password);
@@ -27,6 +24,4 @@ app.post('/api/login', (req, res) => {
     }
 });
 
-app.listen(port, () => {
-    console.log(`Servidor rodando em http://localhost:${port}`);
-});
+module.exports = router;
