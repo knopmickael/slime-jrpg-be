@@ -8,15 +8,15 @@ const SECRET_KEY = 'your_secret_key';
 router.post('/register', (req, res) => {
     const { usermail, username, password } = req.body;
     try {
-        db.prepare('INSERT INTO users (usermail, username, password) VALUES (?, ?, ?)')
-          .run(usermail, username, password);
+        db.prepare('INSERT INTO users (usermail, username, password, profile_picture) VALUES (?, ?, ?, ?)')
+          .run(usermail, username, password, '@/assets/profile-default-image.png');
         res.status(201).send('Usuário registrado com sucesso');
     } catch (e) {
         res.status(400).send('Erro ao registrar usuário');
     }
 });
 
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
     const { username, password } = req.body;
     const user = db.prepare('SELECT * FROM users WHERE username = ? AND password = ?')
                   .get(username, password);
