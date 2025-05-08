@@ -1,0 +1,3 @@
+GET http://localhost:3000/api/users/list
+Content-Type: text/plain
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsInVzZXJuYW1lIjoia25vcG1pY2thZWwiLCJpYXQiOjE3NDY3MTczNjgsImV4cCI6MTc0NjcyMDk2OH0.RUEexVZprmgbgCevHLtNDXY9DQghVp04pxAAfnokXuk

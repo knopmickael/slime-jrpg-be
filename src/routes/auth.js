@@ -1,6 +1,9 @@
 const express = require('express');
 const db = require('../integrations/sqlite-conn');
+const jwt = require('jsonwebtoken');
 const router = express.Router();
+
+const SECRET_KEY = 'your_secret_key';
 
 router.post('/register', (req, res) => {
     const { usermail, username, password } = req.body;
@@ -18,7 +21,8 @@ router.post('/login', (req, res) => {
     const user = db.prepare('SELECT * FROM users WHERE username = ? AND password = ?')
                   .get(username, password);
     if (user) {
-        res.json(user);
+        const token = jwt.sign({ id: user.id, username: user.username }, SECRET_KEY, { expiresIn: '1h' });
+        res.json({ token });
     } else {
         res.status(401).send('Credenciais inválidas');
     }
