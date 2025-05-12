@@ -11,7 +11,7 @@ const listUsers = (_, res) => {
 
 const getCurrentUser = (req, res) => {
   try {
-    const { id } = req.user; // Extracted from the token by authMiddleware
+    const { id } = req.auth; // Extracted from the token by authMiddleware
     const user = db.prepare("SELECT * FROM users WHERE id = ?").get(id);
 
     if (!user) {
