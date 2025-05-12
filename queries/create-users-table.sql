@@ -3,4 +3,6 @@ CREATE TABLE IF NOT EXISTS users (
     username TEXT UNIQUE,
     password TEXT,
     usermail TEXT UNIQUE,
-    profile_picture TEXT)
+    profile_picture TEXT,
+    last_picked_hero INTEGER
+)

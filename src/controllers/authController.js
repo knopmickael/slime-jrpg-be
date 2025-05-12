@@ -7,12 +7,13 @@ const register = (req, res) => {
   const { usermail, username, password } = req.body;
   try {
     db.prepare(
-      "INSERT INTO users (usermail, username, password, profile_picture) VALUES (?, ?, ?, ?)"
+      "INSERT INTO users (usermail, username, password, profile_picture, last_picked_hero) VALUES (?, ?, ?, ?, ?)"
     ).run(
       usermail,
       username,
       password,
-      "https://1drv.ms/i/c/4ddf50075e4db0e6/IQSjg14FoQolRrm-tvHe9_0yAXDIbwzxD0ifsnTMxig_ONs?width=1024"
+      "https://1drv.ms/i/c/4ddf50075e4db0e6/IQSjg14FoQolRrm-tvHe9_0yAXDIbwzxD0ifsnTMxig_ONs?width=1024",
+      null
     );
     res.status(201).send("Usuário registrado com sucesso");
   } catch (e) {

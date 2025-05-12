@@ -8,4 +8,4 @@ CREATE TABLE IF NOT EXISTS slimes (
   agi INTEGER NOT NULL,
   special TEXT,
   unlock_type TEXT NOT NULL
-);
+)
