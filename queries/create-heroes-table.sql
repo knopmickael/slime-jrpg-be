@@ -3,5 +3,4 @@ CREATE TABLE IF NOT EXISTS heroes (
   name TEXT NOT NULL,
   hp INTEGER NOT NULL,
   atk INTEGER NOT NULL,
-  def INTEGER NOT NULL,
-  profile_picture TEXT)
+  def INTEGER NOT NULL)

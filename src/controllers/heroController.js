@@ -2,13 +2,20 @@ const db = require("../integrations/sqlite-conn");
 
 const listHeroes = (_, res) => {
   try {
-    const heros = db.prepare("SELECT * FROM heroes").all();
-    res.status(200).json(heros);
+    const heroes = db
+      .prepare(
+        `
+        SELECT heroes.*, sprites.* 
+        FROM heroes
+        LEFT JOIN sprites ON heroes.id = sprites.hero_id
+      `
+      )
+      .all();
+    res.status(200).json(heroes);
   } catch (e) {
     res.status(400).send("Erro ao listar heróis");
   }
 };
-
 const getHeroByName = (req, res) => {
   const { name } = req.params;
 
