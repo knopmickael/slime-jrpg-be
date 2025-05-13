@@ -1,11 +1,7 @@
-CREATE TABLE IF NOT EXISTS slimes (
+CREATE TABLE IF NOT EXISTS heroes (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL,
-  rarity TEXT NOT NULL,
   hp INTEGER NOT NULL,
   atk INTEGER NOT NULL,
   def INTEGER NOT NULL,
-  agi INTEGER NOT NULL,
-  special TEXT,
-  unlock_type TEXT NOT NULL
-)
+  profile_picture TEXT)
