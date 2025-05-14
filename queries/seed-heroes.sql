@@ -1,4 +1,4 @@
-INSERT INTO heroes (name, hp, atk, def) VALUES
-  ('Red Slime', 35, 12, 6),
-  ('Green Slime', 50, 7, 3),
-  ('Purple Slime', 70, 3, 5)
+INSERT INTO heroes (name, hp, atk, def, description) VALUES
+  ('Red Slime', 35, 12, 6, 'Pequeno e feroz, o Red Slime é puro calor de batalha. Com ataques rápidos e certeiros, compensa sua vida baixa com agressividade. Ideal para quem gosta de resolver combates no primeiro turno.'),
+  ('Green Slime', 50, 7, 3, 'O Green Slime é resistente e persistente. Sua regeneração natural e vitalidade o tornam difícil de derrubar. Prefere batalhas longas, onde sua durabilidade brilha.'),
+  ('Purple Slime', 70, 3, 5, 'O mais enigmático dos três, o Purple Slime resiste ao tempo com sua incrível vitalidade. Seus ataques são fracos, mas sua defesa e HP o transformam num verdadeiro muro gelatinoso.')
