@@ -27,15 +27,21 @@ const login = (req, res) => {
     .prepare("SELECT * FROM users WHERE username = ? AND password = ?")
     .get(username, password);
   if (user) {
-    const token = jwt.sign(
-      { id: user.id, username: user.username, usermail: user.usermail, profilePicture: user.profile_picture },
-      SECRET_KEY,
-      { expiresIn: "1h" }
-    );
+    const token = generateToken({
+      id: user.id,
+      username: user.username,
+      usermail: user.usermail,
+      profilePicture: user.profile_picture,
+      setLastPickedHero: null,
+    });
     res.json({ token });
   } else {
     res.status(401).send("Credenciais inválidas");
   }
 };
 
-module.exports = { register, login };
+const generateToken = (params) => {
+  return jwt.sign(params, SECRET_KEY, { expiresIn: "1h" });
+};
+
+module.exports = { register, login, generateToken };

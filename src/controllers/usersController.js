@@ -1,4 +1,5 @@
 const db = require("../integrations/sqlite-conn");
+const { generateToken } = require("./authController");
 
 const listUsers = (_, res) => {
   try {
@@ -43,16 +44,26 @@ const getUserByUsername = (req, res) => {
 };
 
 const setLastPickedHero = (req, res) => {
-  const { id } = req.body;
+  const { hero } = req.body;
+  const { auth } = req;
 
   try {
-    const result = db.prepare("UPDATE users SET last_picked_hero = ?").run(id);
+    const result = db
+      .prepare("UPDATE users SET last_picked_hero = ? WHERE id = ?")
+      .run(JSON.stringify(hero), auth.id);
 
-    if (result.changes === 0) {
+    if (result.changes === 0)
       return res.status(404).send("Usuário não encontrado");
-    }
 
-    res.status(200).send("Último herói escolhido atualizado com sucesso");
+    const newToken = generateToken({
+      id: auth.id,
+      username: auth.username,
+      usermail: auth.usermail,
+      profilePicture: auth.profilePicture,
+      lastPickedHero: hero,
+    });
+
+    res.status(200).send(newToken);
   } catch (e) {
     res.status(500).send("Erro ao atualizar o último herói escolhido");
   }

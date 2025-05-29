@@ -5,7 +5,7 @@ const listHeroes = (_, res) => {
     const heroes = db
       .prepare(
         `
-        SELECT heroes.*, sprites.* 
+        SELECT heroes.*, sprites.profile_picture, sprites.idle_sprite, sprites.attack_sprite, sprites.damage_received_sprite 
         FROM heroes
         LEFT JOIN sprites ON heroes.id = sprites.hero_id
       `
